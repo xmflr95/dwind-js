@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DWind Test</title>
+  <!-- <scirpt type="module" src="./DWindAPI.js"></scirpt> -->
+</head>
+<body>
+
+  <script type="module">
+    import dwind from './DWindAPI.js';
+    
+    let books = [
+      {
+        "name": "coloring book",
+        "author": "kakao"
+      },
+      {
+          "name": "Where is wd",
+          "author": "Waldo"
+      },
+      {
+        "name": "Doom is Back",
+        "author": "Doom"
+      }
+    ];
+    // dwind({
+    //   url: 'http://localhost:4000/api/books',
+    //   method: 'GET',
+    //   params: {
+    //     name: 'waldo'
+    //   }
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log(data));
+    
+    let url = "http://localhost:4000/api/books";
+    let response = await dwind.post(url, {
+      data: books
+    });
+    console.log(response);
+
+    let res2 = await dwind.delete(url, {
+      id: '1'
+    });
+    console.log(res2);
+
+    let res3 = await dwind.delete(url + '/3');
+    console.log(res3);
+
+    dwind({
+      url: "http://localhost:4000/api/books/",
+      method: 'DELETE',
+      params: {
+        id: 4
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
+  </script>
+
+</body>
+</html>
